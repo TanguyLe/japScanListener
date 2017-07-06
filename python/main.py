@@ -1,14 +1,15 @@
-from requests import get
-from time import sleep
 from datetime import datetime
 from re import search
+from time import sleep
 
-from email_utils import SmtpLink
-from mangas import Manga
-from private_config import ME, GAUTIER
-from scrapper import JapScanScrapper
-from file_utils import get_already_alerted_mangas, get_followed_mangas, dump_already_alerted_mangas
 from constants import *
+from email_utils import SmtpLink
+from file_utils import get_already_alerted_mangas, get_followed_mangas, dump_already_alerted_mangas
+from mangas import Manga
+from requests import get
+from scrapper import JapScanScrapper
+
+from private_config import ME
 
 # load followed mangas:
 followed_mangas = get_followed_mangas()
