@@ -37,4 +37,7 @@ class SmtpLink:
         self.server.quit()
 
     def __del__(self):
-        self.server.quit()
+        try:
+            self.server.quit()
+        except:
+            pass
