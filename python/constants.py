@@ -1,16 +1,19 @@
-SCRAPPING_TIMEOUT = 15*60
+SCRAPPING_TIMEOUT = 1
 
 SCRAPPING_STARTS = "Scrapping starts at {time!s}."
 SCRAPPING_COMPLETED = "Scrapping completed. ({delta!s}ms)"
-JAPSCAN_URL = 'http://www.japscan.com/'
+JAPSCAN_URL = "http://www.japscan.com/"
+MANGAKAKALOT_URL = "http://mangakakalot.com/"
 
-VF_REGEX = '(\d*) VF'
+VF_REGEX = "(\d+) VF"
+NUMBER_REGEX = "chapter ([0-9]+)"
 FR_TYPE = "(FR)"
+US_TYPE = "(US)"
 RAW_TYPE = "(RAW)"
 SPOILER_TYPE = "(SPOILER)"
-LINE_MSG = "The manga {title!s} has a chapter ready at :{link!s}\n"
+START_MSH = "The following chapters are ready: \n"
 
-SUBJECT = "Some Chapters are ready:"
+SUBJECT = "Some Chapters are ready for you to read!"
 ORIGIN = "JapScan Alert Tool"
 DESTINATION = "Me"
 
