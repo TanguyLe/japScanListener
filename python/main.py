@@ -18,8 +18,6 @@ followed_mangas = get_followed_mangas()
 already_alerted_mangas = get_already_alerted_mangas()
 
 while 1:
-    sleep(SCRAPPING_TIMEOUT)
-
     now_orig = datetime.now()
 
     print(SCRAPPING_STARTS.format(time=now_orig.strftime("%Hh%M")))
@@ -44,6 +42,7 @@ while 1:
                             (manga.title not in already_alerted_mangas.keys() or
                                 manga.chapters_numbers[idx] > already_alerted_mangas[manga.title])):
                         already_alerted_mangas[manga.title] = manga.chapters_numbers[idx]
+                        msg += manga.title + " "
                         msg += manga.serialize_chapter(idx)
 
     if msg:
@@ -57,7 +56,7 @@ while 1:
                                             destination=DESTINATION)
         print(SENDING_EMAILS)
         print(msg)
-        # mail_server.send_mail(to_addrs=ME, msg=str_msg)
+        mail_server.send_mail(to_addrs=ME, msg=str_msg)
         # mail_server.send_mail(to_addrs=[GAUTIER, ME], msg=str_msg)
 
         mail_server.close()
@@ -66,3 +65,4 @@ while 1:
     delta = now_end - now_orig
 
     print(SCRAPPING_COMPLETED.format(delta=str(delta.total_seconds() * 100)[0:4]))
+    sleep(SCRAPPING_TIMEOUT)

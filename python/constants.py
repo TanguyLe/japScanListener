@@ -1,4 +1,4 @@
-SCRAPPING_TIMEOUT = 1
+SCRAPPING_TIMEOUT = 60*15
 
 SCRAPPING_STARTS = "Scrapping starts at {time!s}."
 SCRAPPING_COMPLETED = "Scrapping completed. ({delta!s}ms)"

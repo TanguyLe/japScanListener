@@ -15,7 +15,7 @@ class Manga:
             self.chapters_links = chapters_links
 
     def serialize_chapter(self, index):
-        r_str = '\t' + str(self.chapters_numbers[index]) + ": " + self.chapters_types[index] + " at "
+        r_str = str(self.chapters_numbers[index]) + ": " + self.chapters_types[index] + " at "
         r_str += self.chapters_links[index] + '\n'
 
         return r_str
