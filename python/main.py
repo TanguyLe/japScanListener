@@ -48,18 +48,18 @@ while 1:
         if msg:
             mail_server = SmtpLink.create_service()
 
-        dump_already_alerted_mangas(already_alerted_mangas)
+            dump_already_alerted_mangas(already_alerted_mangas)
 
-        str_msg = SmtpLink.get_string_email(msg=msg,
-                                            subject=SUBJECT,
-                                            origin=ORIGIN,
-                                            destination=DESTINATION)
-        print(SENDING_EMAILS)
-        print(msg)
-        mail_server.send_mail(to_addrs=ME, msg=str_msg)
-        # mail_server.send_mail(to_addrs=[GAUTIER, ME], msg=str_msg)
+            str_msg = SmtpLink.get_string_email(msg=msg,
+                                                subject=SUBJECT,
+                                                origin=ORIGIN,
+                                                destination=DESTINATION)
+            print(SENDING_EMAILS)
+            print(msg)
+            mail_server.send_mail(to_addrs=ME, msg=str_msg)
+            # mail_server.send_mail(to_addrs=[GAUTIER, ME], msg=str_msg)
 
-        mail_server.close()
+            mail_server.close()
 
         now_end = datetime.now()
         delta = now_end - now_orig
