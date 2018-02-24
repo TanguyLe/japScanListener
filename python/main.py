@@ -11,62 +11,68 @@ from scrapper_mangakakalot import MangakakalotScrapper
 
 from private_config import ME
 
-# load followed mangas:
-followed_mangas = get_followed_mangas()
 
-# load already_alerted_mangas:
-already_alerted_mangas = get_already_alerted_mangas()
+def main():
+    # load followed mangas:
+    followed_mangas = get_followed_mangas()
 
-while 1:
-    now_orig = datetime.now()
+    # load already_alerted_mangas:
+    already_alerted_mangas = get_already_alerted_mangas()
 
-    print(SCRAPPING_STARTS.format(time=now_orig.strftime("%Hh%M")))
+    while 1:
+        now_orig = datetime.now()
 
-    try:
-        result_japscan = get(JAPSCAN_URL)
-        content_japscan = result_japscan.content
+        print(SCRAPPING_STARTS.format(time=now_orig.strftime("%Hh%M")))
 
-        scrapper_japscan = JapScanScrapper(content_japscan)
+        try:
+            result_japscan = get(JAPSCAN_URL)
+            content_japscan = result_japscan.content
 
-        result_mangakakalot = get(MANGAKAKALOT_URL)
-        content_mangakakalot = result_mangakakalot.content
+            scrapper_japscan = JapScanScrapper(content_japscan)
 
-        scrapper_mangakakalot = MangakakalotScrapper(content_mangakakalot)
+            result_mangakakalot = get(MANGAKAKALOT_URL)
+            content_mangakakalot = result_mangakakalot.content
 
-        mangas_to_watch = [Manga(dict=m) for m in (scrapper_japscan.get_mangas() + scrapper_mangakakalot.get_mangas())]
-        msg = ""
+            scrapper_mangakakalot = MangakakalotScrapper(content_mangakakalot)
 
-        for manga in mangas_to_watch:
-            if manga.title in followed_mangas:
-                    for idx, chapter_type in enumerate(manga.chapters_types):
-                        if (chapter_type not in [RAW_TYPE, SPOILER_TYPE] and
-                                (manga.title not in already_alerted_mangas.keys() or
-                                    manga.chapters_numbers[idx] > already_alerted_mangas[manga.title])):
-                            already_alerted_mangas[manga.title] = manga.chapters_numbers[idx]
-                            msg += manga.title + " "
-                            msg += manga.serialize_chapter(idx)
-        if msg:
-            mail_server = SmtpLink.create_service()
+            mangas_to_watch = [Manga(dict=m) for m in (scrapper_japscan.get_mangas() + scrapper_mangakakalot.get_mangas())]
+            msg = ""
 
-            dump_already_alerted_mangas(already_alerted_mangas)
+            for manga in mangas_to_watch:
+                if manga.title in followed_mangas:
+                        for idx, chapter_type in enumerate(manga.chapters_types):
+                            if (chapter_type not in [RAW_TYPE, SPOILER_TYPE] and
+                                    (manga.title not in already_alerted_mangas.keys() or
+                                        manga.chapters_numbers[idx] > already_alerted_mangas[manga.title])):
+                                already_alerted_mangas[manga.title] = manga.chapters_numbers[idx]
+                                msg += manga.title + " "
+                                msg += manga.serialize_chapter(idx)
+            if msg:
+                mail_server = SmtpLink.create_service()
 
-            str_msg = SmtpLink.get_string_email(msg=msg,
-                                                subject=SUBJECT,
-                                                origin=ORIGIN,
-                                                destination=DESTINATION)
-            print(SENDING_EMAILS)
-            print(msg)
-            mail_server.send_mail(to_addrs=ME, msg=str_msg)
-            # mail_server.send_mail(to_addrs=[GAUTIER, ME], msg=str_msg)
+                dump_already_alerted_mangas(already_alerted_mangas)
 
-            mail_server.close()
+                str_msg = SmtpLink.get_string_email(msg=msg,
+                                                    subject=SUBJECT,
+                                                    origin=ORIGIN,
+                                                    destination=DESTINATION)
+                print(SENDING_EMAILS)
+                print(msg)
+                mail_server.send_mail(to_addrs=ME, msg=str_msg)
+                # mail_server.send_mail(to_addrs=[GAUTIER, ME], msg=str_msg)
 
-        now_end = datetime.now()
-        delta = now_end - now_orig
+                mail_server.close()
 
-        print(SCRAPPING_COMPLETED.format(delta=str(delta.total_seconds() * 100)[0:4]))
+            now_end = datetime.now()
+            delta = now_end - now_orig
 
-    except exceptions.RequestException as e:
-        print(SCRAPPING_FAILED.format(error=str(e)))
+            print(SCRAPPING_COMPLETED.format(delta=str(delta.total_seconds() * 100)[0:4]))
 
-    sleep(SCRAPPING_TIMEOUT)
+        except Exception as e:
+            print(SCRAPPING_FAILED.format(error=str(e)))
+
+        sleep(SCRAPPING_TIMEOUT)
+
+
+if __name__ == "__main__":
+    main()
