@@ -14,7 +14,7 @@ from private_config import ME
 def full_process(already_alerted_mangas, followed_mangas, cron=False):
     now_orig = datetime.now()
 
-    print(SCRAPPING_STARTS.format(time=now_orig.strftime("%Hh%M")))
+    print(SCRAPPING_STARTS.format(date=now_orig.strftime("%b %d"), time=now_orig.strftime("%Hh%M")))
 
     try:
         result_japscan = get(JAPSCAN_URL)
@@ -58,7 +58,7 @@ def full_process(already_alerted_mangas, followed_mangas, cron=False):
         now_end = datetime.now()
         delta = now_end - now_orig
 
-        print(SCRAPPING_COMPLETED.format(delta=str(delta.total_seconds() * 100)[0:4]))
+        print(SCRAPPING_COMPLETED.format(date=now_orig.strftime("%b %d"), delta=str(delta.total_seconds() * 100)[0:4]))
 
     except Exception as e:
-        print(SCRAPPING_FAILED.format(error=str(e)))
+        print(SCRAPPING_FAILED.format(date=now_orig.strftime("%b %d"), error=str(e)))

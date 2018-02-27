@@ -1,8 +1,8 @@
 SCRAPPING_TIMEOUT = 60*15
 
-SCRAPPING_STARTS = "Scrapping starts at {time!s}."
-SCRAPPING_COMPLETED = "Scrapping completed. ({delta!s}ms)"
-SCRAPPING_FAILED = "Scrapping failed: {error}"
+SCRAPPING_STARTS = "{date!s}: Scrapping starts at {time!s}."
+SCRAPPING_COMPLETED = "{date!s}: Scrapping completed. ({delta!s}ms)"
+SCRAPPING_FAILED = "{date!s}: Scrapping failed: {error}"
 JAPSCAN_URL = "http://www.japscan.com/"
 MANGAKAKALOT_URL = "http://mangakakalot.com/"
 
