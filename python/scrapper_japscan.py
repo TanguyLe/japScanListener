@@ -12,24 +12,27 @@ class JapScanScrapper:
         if not self.div:
             self.div = soup.find(name="div", text="Hier")
 
-        self.div = self.div.next_sibling
+        self.div = self.div.next_sibling.next_sibling
 
     def until_next_date_condition(self):
         return "date" not in self.div.get('class')
 
     def get_chapters_div_from_manga(self):
-        if self.div.next_sibling.get('class') and ("hot" in self.div.next_sibling.get('class')):
-            chapters_div = self.div.next_sibling.next_sibling
+        first_sibling = self.div.next_sibling.next_sibling
+        if first_sibling.get('class') and ("hot" in first_sibling.get('class')):
+            chapters_div = first_sibling.next_sibling.next_sibling
         else:
-            chapters_div = self.div.next_sibling
+            chapters_div = first_sibling
 
         return chapters_div
 
     def next_manga_from_manga(self):
-        if self.div.next_sibling.get('class') and ("hot" in self.div.next_sibling.get('class')):
-            self.div = self.div.next_sibling.next_sibling.next_sibling
+        first_sibling = self.div.next_sibling.next_sibling
+
+        if first_sibling.get('class') and ("hot" in first_sibling.get('class')):
+            self.div = first_sibling.next_sibling.next_sibling.next_sibling.next_sibling
         else:
-            self.div = self.div.next_sibling.next_sibling
+            self.div = first_sibling.next_sibling.next_sibling
 
     def get_cursor(self):
         return self.div
@@ -40,6 +43,7 @@ class JapScanScrapper:
         while self.until_next_date_condition():
 
             chapters_list = self.get_chapters_div_from_manga().contents
+            chapters_list = [c for c in chapters_list if c != "\n"]
 
             list_chapter_types = []
             list_chapter_links = []
@@ -47,6 +51,7 @@ class JapScanScrapper:
 
             for chapter in chapters_list:
                 chapter_contents = chapter.contents
+                chapter_contents = [c for c in chapter_contents if c != "\n"]
 
                 chapter_number = int(search(VF_REGEX, str(chapter_contents[0])).group(1))
 
