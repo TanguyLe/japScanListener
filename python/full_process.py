@@ -8,7 +8,7 @@ from scrapper_japscan import JapScanScrapper
 from scrapper_mangakakalot import MangakakalotScrapper
 from file_utils import dump_already_alerted_mangas
 
-from private_config import ME
+from private_config import PERSONS
 
 
 def full_process(already_alerted_mangas, followed_mangas, cron=False):
@@ -50,8 +50,8 @@ def full_process(already_alerted_mangas, followed_mangas, cron=False):
                                                 destination=DESTINATION)
             print(SENDING_EMAILS)
             print(msg)
-            mail_server.send_mail(to_addrs=ME, msg=str_msg)
-            # mail_server.send_mail(to_addrs=[GAUTIER, ME], msg=str_msg)
+
+            mail_server.send_mail(to_addrs=PERSONS, msg=str_msg)
 
             mail_server.close()
 
