@@ -1,6 +1,6 @@
-from datetime import datetime
-from email_utils import SmtpLink
+import logging
 
+from email_utils import SmtpLink
 from constants import *
 from mangas import Manga
 from requests import get
@@ -12,9 +12,17 @@ from private_config import PERSONS
 
 
 def full_process(already_alerted_mangas, followed_mangas, cron=False):
-    now_orig = datetime.now()
 
-    print(SCRAPPING_STARTS.format(date=now_orig.strftime("%b %d"), time=now_orig.strftime("%Hh%M")))
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
+    handler = logging.FileHandler(LOG_FILENAME)
+    handler.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                                  DATE_FORMAT)
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+
+    logger.info(SCRAPPING_STARTS)
 
     try:
         result_japscan = get(JAPSCAN_URL)
@@ -48,17 +56,14 @@ def full_process(already_alerted_mangas, followed_mangas, cron=False):
                                                 subject=SUBJECT,
                                                 origin=ORIGIN,
                                                 destination=DESTINATION)
-            print(SENDING_EMAILS)
-            print(msg)
+            logger.info(SENDING_EMAILS)
+            logger.info(msg)
 
-            mail_server.send_mail(to_addrs=PERSONS, msg=str_msg)
+            # mail_server.send_mail(to_addrs=PERSONS, msg=str_msg)
 
             mail_server.close()
 
-        now_end = datetime.now()
-        delta = now_end - now_orig
-
-        print(SCRAPPING_COMPLETED.format(date=now_orig.strftime("%b %d"), delta=str(delta.total_seconds() * 100)[0:4]))
+        logger.info(SCRAPPING_COMPLETED)
 
     except Exception as e:
-        print(SCRAPPING_FAILED.format(date=now_orig.strftime("%b %d"), error=str(e)))
+        logger.info(SCRAPPING_FAILED.format(error=str(e)))

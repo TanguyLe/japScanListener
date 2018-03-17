@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from re import search
 
-from constants import NUMBER_REGEX, US_TYPE
+from constants import CHAPTER_NUMBER_REGEX, US_TYPE
 
 
 class MangakakalotScrapper:
@@ -48,7 +48,7 @@ class MangakakalotScrapper:
                 chapter_link_div = chapter.contents[1].contents[0]
                 chapter_number_text = chapter_link_div.text.strip()
 
-                chapter_number = int(search(NUMBER_REGEX, chapter_number_text).group(1))
+                chapter_number = int(search(CHAPTER_NUMBER_REGEX, chapter_number_text).group(2))
 
                 list_chapter_links.append(chapter_link_div.get('href'))
                 list_chapter_types.append(US_TYPE)

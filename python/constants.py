@@ -1,13 +1,19 @@
 SCRAPPING_TIMEOUT = 60*15
 
-SCRAPPING_STARTS = "{date!s}: Scrapping starts at {time!s}."
-SCRAPPING_COMPLETED = "{date!s}: Scrapping completed. ({delta!s}ms)"
-SCRAPPING_FAILED = "{date!s}: Scrapping failed: {error}"
+SCRAPPING_STARTS = "Scrapping starts."
+SCRAPPING_COMPLETED = "Scrapping completed."
+SCRAPPING_FAILED_TEXT = "Scrapping failed."
+SCRAPPING_FAILED = SCRAPPING_FAILED_TEXT + ": {error}"
 JAPSCAN_URL = "http://www.japscan.com/"
 MANGAKAKALOT_URL = "http://mangakakalot.com/"
 
+DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+LOG_FILENAME = "japscanListener.log"
+
+HTTP_CONNECTION_POOL = "HTTPConnectionPool"
+
 VF_REGEX = "(\d+) VF"
-NUMBER_REGEX = "chapter ([0-9]+)"
+CHAPTER_NUMBER_REGEX = "(chapter|chapter Extra) ([0-9]+)"
 FR_TYPE = "(FR)"
 US_TYPE = "(US)"
 RAW_TYPE = "(RAW)"
