@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-import os
 
 from constants import *
 from email_utils import SmtpLink
@@ -14,9 +13,8 @@ if __name__ == '__main__':
     yesterday_str = yesterday.strftime(DATE_FORMAT)
 
     status = True
-    d = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    for line in reversed(list(open(os.path.join(d, LOG_FILENAME), "r"))):
+    for line in reversed(list(open(LOG_PATH, "r"))):
         current_line = line.rstrip()
 
         if yesterday_str not in current_line:

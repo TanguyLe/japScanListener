@@ -15,7 +15,7 @@ def full_process(already_alerted_mangas, followed_mangas, cron=False):
 
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger(__name__)
-    handler = logging.FileHandler(LOG_FILENAME)
+    handler = logging.FileHandler(LOG_PATH)
     handler.setLevel(logging.INFO)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                                   DATE_FORMAT)

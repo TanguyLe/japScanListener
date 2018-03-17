@@ -1,3 +1,7 @@
+import os
+
+d = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 SCRAPPING_TIMEOUT = 60*15
 
 SCRAPPING_STARTS = "Scrapping starts."
@@ -9,6 +13,7 @@ MANGAKAKALOT_URL = "http://mangakakalot.com/"
 
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 LOG_FILENAME = "japscanListener.log"
+LOG_PATH = os.path.join(d, LOG_FILENAME)
 
 HTTP_CONNECTION_POOL = "HTTPConnectionPool"
 
