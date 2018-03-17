@@ -59,7 +59,7 @@ def full_process(already_alerted_mangas, followed_mangas, cron=False):
             logger.info(SENDING_EMAILS)
             logger.info(msg)
 
-            # mail_server.send_mail(to_addrs=PERSONS, msg=str_msg)
+            mail_server.send_mail(to_addrs=PERSONS, msg=str_msg)
 
             mail_server.close()
 
