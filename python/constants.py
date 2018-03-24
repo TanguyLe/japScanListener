@@ -18,7 +18,7 @@ LOG_PATH = os.path.join(d, LOG_FILENAME)
 HTTP_CONNECTION_POOL = "HTTPConnectionPool"
 
 VF_REGEX = "(\d+) VF"
-CHAPTER_NUMBER_REGEX = "(chapter|chapter Extra) ([0-9]+)"
+CHAPTER_NUMBER_REGEX = "(chapter|chapter Extra|Chapter|Chapter Extra) ([0-9]+)"
 FR_TYPE = "(FR)"
 US_TYPE = "(US)"
 RAW_TYPE = "(RAW)"

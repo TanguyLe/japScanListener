@@ -40,39 +40,42 @@ class JapScanScrapper:
     def get_mangas(self):
         mangas = []
 
-        while self.until_next_date_condition():
+        try:
+            while self.until_next_date_condition():
 
-            chapters_list = self.get_chapters_div_from_manga().contents
-            chapters_list = [c for c in chapters_list if c != "\n"]
+                chapters_list = self.get_chapters_div_from_manga().contents
+                chapters_list = [c for c in chapters_list if c != "\n"]
 
-            list_chapter_types = []
-            list_chapter_links = []
-            list_chapter_numbers = []
+                list_chapter_types = []
+                list_chapter_links = []
+                list_chapter_numbers = []
 
-            for chapter in chapters_list:
-                chapter_contents = chapter.contents
-                chapter_contents = [c for c in chapter_contents if c != "\n"]
+                for chapter in chapters_list:
+                    chapter_contents = chapter.contents
+                    chapter_contents = [c for c in chapter_contents if c != "\n"]
 
-                chapter_number = int(search(VF_REGEX, str(chapter_contents[0])).group(1))
+                    chapter_number = int(search(VF_REGEX, str(chapter_contents[0])).group(1))
 
-                if len(chapter_contents) == 2:
-                    chapter_type_str = chapter_contents[1].text.strip()
-                else:
-                    chapter_type_str = FR_TYPE
+                    if len(chapter_contents) == 2:
+                        chapter_type_str = chapter_contents[1].text.strip()
+                    else:
+                        chapter_type_str = FR_TYPE
 
-                list_chapter_links.append(JAPSCAN_URL + chapter_contents[0].get('href'))
-                list_chapter_types.append(chapter_type_str)
-                list_chapter_numbers.append(chapter_number)
+                    list_chapter_links.append(JAPSCAN_URL + chapter_contents[0].get('href'))
+                    list_chapter_types.append(chapter_type_str)
+                    list_chapter_numbers.append(chapter_number)
 
-            manga = dict()
-            manga['title'] = self.get_cursor().text
-            manga['chapters_types'] = list_chapter_types
-            manga['chapters_links'] = list_chapter_links
-            manga['chapters_numbers'] = list_chapter_numbers
+                manga = dict()
+                manga['title'] = self.get_cursor().text
+                manga['chapters_types'] = list_chapter_types
+                manga['chapters_links'] = list_chapter_links
+                manga['chapters_numbers'] = list_chapter_numbers
 
-            mangas.append(manga)
+                mangas.append(manga)
 
-            self.next_manga_from_manga()
+                self.next_manga_from_manga()
 
-        return mangas
+            return mangas
+        except Exception as e:
+            raise(Exception("Scrapper_japscan failed: " + str(e)))
 
