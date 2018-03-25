@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from constants import *
 from email_utils import SmtpLink
@@ -9,15 +9,14 @@ if __name__ == '__main__':
     msg_list = []
 
     current_date = datetime.now()
-    yesterday = current_date - timedelta(1)
-    yesterday_str = yesterday.strftime(DATE_FORMAT)
+    today_str = current_date.strftime(DATE_FORMAT)
 
     status = True
 
     for line in reversed(list(open(LOG_PATH, "r"))):
         current_line = line.rstrip()
 
-        if yesterday_str not in current_line:
+        if today_str in current_line or FULL_PROCESS not in current_line:
             if SCRAPPING_FAILED_TEXT in current_line and HTTP_CONNECTION_POOL not in current_line:
                 status = False
             msg_list.append(current_line)

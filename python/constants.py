@@ -11,14 +11,17 @@ SCRAPPING_FAILED = SCRAPPING_FAILED_TEXT + ": {error}"
 JAPSCAN_URL = "http://www.japscan.com/"
 MANGAKAKALOT_URL = "http://mangakakalot.com/"
 
-DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+DATE_FORMAT = "%Y-%m-%d"
+DATETIME_FORMAT = DATE_FORMAT + " %H:%M:%S"
 LOG_FILENAME = "japscanListener.log"
 LOG_PATH = os.path.join(d, LOG_FILENAME)
+
+FULL_PROCESS = "full_process"
 
 HTTP_CONNECTION_POOL = "HTTPConnectionPool"
 
 VF_REGEX = "(\d+) VF"
-CHAPTER_NUMBER_REGEX = "(chapter|chapter Extra|Chapter|Chapter Extra) ([0-9]+)"
+CHAPTER_NUMBER_REGEX = "(chapter|chapter Extra|Chapter|Chapter Extra|Chap|chap) ([0-9]+)"
 FR_TYPE = "(FR)"
 US_TYPE = "(US)"
 RAW_TYPE = "(RAW)"
