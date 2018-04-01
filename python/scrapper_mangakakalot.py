@@ -34,6 +34,7 @@ class MangakakalotScrapper:
 
     def get_mangas(self):
         mangas = []
+        chapter_number_text = ""
 
         try:
             while self.until_next_date_condition():
@@ -68,4 +69,4 @@ class MangakakalotScrapper:
             return mangas
 
         except Exception as e:
-            raise(Exception("Scrapper_mangakakalot failed: " + str(e)))
+            raise(Exception("Scrapper_mangakakalot failed (on " + str(chapter_number_text) + "): " + str(e)))
