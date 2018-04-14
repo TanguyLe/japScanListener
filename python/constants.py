@@ -21,7 +21,7 @@ FULL_PROCESS = "full_process"
 HTTP_CONNECTION_POOL = "HTTPConnectionPool"
 
 VF_REGEX = "(\d+) VF"
-CHAPTER_NUMBER_REGEX = "(chapter|chapter Extra|Chapter|Chapter Extra|Chap|chap|capter) ([0-9]+)"
+CHAPTER_NUMBER_REGEX = "(chapter|chapter Extra|Chapter|Chapter Extra|Chap|chap|capter|chpater) ([0-9]+)"
 FR_TYPE = "(FR)"
 US_TYPE = "(US)"
 RAW_TYPE = "(RAW)"
