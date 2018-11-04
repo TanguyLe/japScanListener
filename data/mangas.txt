@@ -20,6 +20,7 @@ Dragon Ball Super
 Dragon Ball Z
 Dragon Ball Zeroverse
 Drifters
+Dr Stone
 Edens Zero
 Enfer et Paradis
 Fairy Tail
@@ -29,6 +30,7 @@ Gunnm
 Gunnm Last Order
 Hellsing
 Hinomaru Zumou
+Hokuto No Ken
 Hunter X Hunter
 Jojo's Bizarre Adventure
 Jusqu'à Ce Que La Mort Nous Sépare
@@ -49,10 +51,12 @@ One Piece
 One Punch Man
 Origins
 Owari No Seraph
+Parasytes
 Prophecy
 Psycho-Pass Inspecteur Shinya Kogami
 Psyren
 Psycho Pass
+Radiant
 Reborn
 Saint Seiya
 Shaman King
@@ -61,6 +65,7 @@ Shokugeki No Soma
 Sun-Ken Rock
 Terra Formars
 The Arms Peddler
+The Breaker
 The Promised Neverland
 Toriko
 Tokyo Ghoul
