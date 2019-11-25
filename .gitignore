@@ -1,6 +1,8 @@
 private_config.py
 .idea
 
+data/mangas.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

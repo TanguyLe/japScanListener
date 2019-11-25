@@ -21,12 +21,12 @@ def main():
 
     if not cron_mode:
         while 1:
-            full_process(already_alerted_mangas=already_alerted_mangas, followed_mangas=followed_mangas, cron=cron_mode)
+            full_process(already_alerted_mangas=already_alerted_mangas, followed_mangas=followed_mangas)
 
             sleep(SCRAPPING_TIMEOUT)
 
     else:
-        full_process(already_alerted_mangas=already_alerted_mangas, followed_mangas=followed_mangas, cron=cron_mode)
+        full_process(already_alerted_mangas=already_alerted_mangas, followed_mangas=followed_mangas)
 
 
 if __name__ == "__main__":

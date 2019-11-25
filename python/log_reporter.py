@@ -3,7 +3,6 @@ from datetime import datetime
 from constants import *
 from email_utils import SmtpLink
 
-from private_config import ME
 
 if __name__ == '__main__':
     msg_list = []
@@ -32,4 +31,4 @@ if __name__ == '__main__':
                                         origin=ORIGIN,
                                         destination=DESTINATION)
 
-    mail_server.send_mail(to_addrs=ME, msg=str_msg)
+    mail_server.send_mail(to_addrs=os.environ["JAP_USERNAME"], msg=str_msg)

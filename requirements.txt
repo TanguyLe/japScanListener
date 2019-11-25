@@ -1,0 +1,4 @@
+cfscrape
+beautifulSoup4
+lxml
+requests

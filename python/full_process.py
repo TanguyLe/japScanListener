@@ -1,18 +1,17 @@
 import logging
+import cfscrape
 
 from email_utils import SmtpLink
 from constants import *
 from mangas import Manga
-from requests import get
 from scrapper_japscan import JapScanScrapper
 from scrapper_mangakakalot import MangakakalotScrapper
 from file_utils import dump_already_alerted_mangas
 
-from private_config import PERSONS
+PERSONS = os.environ["JAP_PERSONS"].split(' ')
 
 
-def full_process(already_alerted_mangas, followed_mangas, cron=False):
-
+def full_process(already_alerted_mangas, followed_mangas):
     logging.basicConfig(level=logging.INFO)
     logger = logging.getLogger(__name__)
     handler = logging.FileHandler(LOG_PATH)
@@ -24,12 +23,13 @@ def full_process(already_alerted_mangas, followed_mangas, cron=False):
     logger.info(SCRAPPING_STARTS)
 
     try:
-        result_japscan = get(JAPSCAN_URL)
+        scraper = cfscrape.create_scraper()
+        result_japscan = scraper.get(JAPSCAN_URL)
         content_japscan = result_japscan.content
 
         scrapper_japscan = JapScanScrapper(content_japscan)
 
-        result_mangakakalot = get(MANGAKAKALOT_URL)
+        result_mangakakalot = scraper.get(MANGAKAKALOT_URL)
         content_mangakakalot = result_mangakakalot.content
 
         scrapper_mangakakalot = MangakakalotScrapper(content_mangakakalot)
@@ -42,7 +42,7 @@ def full_process(already_alerted_mangas, followed_mangas, cron=False):
                 for idx, chapter_type in enumerate(manga.chapters_types):
                     if (chapter_type not in [RAW_TYPE, SPOILER_TYPE] and
                             (manga.title not in already_alerted_mangas.keys() or
-                                     manga.chapters_numbers[idx] > already_alerted_mangas[manga.title])):
+                             manga.chapters_numbers[idx] > already_alerted_mangas[manga.title])):
                         already_alerted_mangas[manga.title] = manga.chapters_numbers[idx]
                         msg += manga.title + " "
                         msg += manga.serialize_chapter(idx)

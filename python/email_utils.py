@@ -1,13 +1,12 @@
 import smtplib
 from email.mime.text import MIMEText
-
-import private_config as private_constants
+import os
 
 
 class SmtpLink:
     @staticmethod
     def create_service(address="smtp.gmail.com", port=587,
-                       username=private_constants.USERNAME, password=private_constants.PASSWORD):
+                       username=os.environ["JAP_USERNAME"], password=os.environ["JAP_PASSWORD"]):
         server = smtplib.SMTP(address + ':' + str(port))
         server.ehlo()
         server.starttls()
@@ -18,7 +17,7 @@ class SmtpLink:
     def __init__(self, server):
         self.server = server
 
-    def send_mail(self, to_addrs, msg, from_addr=private_constants.USERNAME):
+    def send_mail(self, to_addrs, msg, from_addr=os.environ["JAP_USERNAME"]):
         if type(to_addrs) == "string":
             to_addrs = [to_addrs]
 
