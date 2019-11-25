@@ -5,6 +5,7 @@ Akira
 Assassination Classroom
 Astro Boy
 Beelzebub
+Bem
 Berserk
 Black Clover
 Black Jack
@@ -13,9 +14,11 @@ Boruto
 Claymore
 Code Geass
 D Gray Man
+Darwin's Game
 Deadman Wonderland
 Death Note
 Detective Conan
+Devilman Crybaby
 Dice
 Dolly Kill Kill
 Dragon Ball
@@ -25,14 +28,20 @@ Dragon Ball Z
 Dragon Ball Zeroverse
 Drifters
 Dr Stone
+Durarara
 Edens Zero
 Enfer et Paradis
 Fairy Tail
 Fire Punch
 Fullmetal Alchemist
 Gantz
+Get Backers
+Ghost Teller
+Goblin Slayer
+Grand Blue
 Gunnm
 Gunnm Last Order
+Guren Laggan
 Hardcore Levelling Warrior
 Hellsing
 Hinomaru Zumou
@@ -43,9 +52,12 @@ Jojo's Bizarre Adventure
 Jusqu'à Ce Que La Mort Nous Sépare
 Karate Shoukoushi Kohinata Minoru
 Ken Le Survivant
+Kenja no mago
 Kill la Kill
+Kimetsu No Yaiba
 King's Game
 Kingdom
+Layers of Fear
 Les Chevaliers du Zodiaque
 Les Gouttes de Dieu
 Les raisins de la colère
@@ -56,6 +68,7 @@ My Hero Academia
 Nanatsu No Taizai
 Naruto
 Naruto Gaiden
+Neo Genesis Evangelion
 Noblesse
 One Piece
 One Punch Man
@@ -67,16 +80,20 @@ Psycho-Pass Inspecteur Shinya Kogami
 Psyren
 Psycho Pass
 Radiant
+Rebirth
 Reborn
 Saint Seiya
 Shaman King
 Shingeki No Kyojin
 Shokugeki No Soma
+Starving anonymous
 Sun-Ken Rock
+Terror in Resonance
 Terra Formars
 The Arms Peddler
 The Breaker
 The Gamer
+The God of High School
 The Promised Neverland
 Toriko
 Tokyo Ghoul
@@ -84,6 +101,7 @@ Tokyo Ghoul:re
 Tower of God
 Tsubasa Reservoir Chronicle
 Ubel Blatt
+Unordinary
 Vampire Chronicles
 Wizardly Tower
 Yu-Gi-Oh!
