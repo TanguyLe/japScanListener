@@ -50,7 +50,7 @@ class JapScanScrapper:
                         else:
                             chapter_type_str = FR_TYPE
 
-                        list_chapter_links.append(os.path.join(JAPSCAN_URL, chapter_link))
+                        list_chapter_links.append(JAPSCAN_URL + chapter_link[1:])
                         list_chapter_types.append(chapter_type_str)
                         list_chapter_numbers.append(chapter_number)
 
