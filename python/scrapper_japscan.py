@@ -1,79 +1,66 @@
 from bs4 import BeautifulSoup
 from re import search
 
+import os
+
 from constants import VF_REGEX, FR_TYPE, JAPSCAN_URL
 
 
 class JapScanScrapper:
     def __init__(self, content):
-        soup = BeautifulSoup(content, "lxml")
+        self.soup = BeautifulSoup(content, "lxml")
 
-        self.div = soup.find(name="div", text="Aujourd'hui")
-        if not self.div:
-            self.div = soup.find(name="div", text="Hier")
+    @staticmethod
+    def get_manga_title(divs_iter):
+        return next(divs_iter).contents[1].text
 
-        self.div = self.div.next_sibling.next_sibling
+    @staticmethod
+    def get_chapters_list(divs_iter):
+        next(divs_iter)
 
-    def until_next_date_condition(self):
-        return "date" not in self.div.get('class')
-
-    def get_chapters_div_from_manga(self):
-        first_sibling = self.div.next_sibling.next_sibling
-        if first_sibling.get('class') and ("hot" in first_sibling.get('class')):
-            chapters_div = first_sibling.next_sibling.next_sibling
-        else:
-            chapters_div = first_sibling
-
-        return chapters_div
-
-    def next_manga_from_manga(self):
-        first_sibling = self.div.next_sibling.next_sibling
-
-        if first_sibling.get('class') and ("hot" in first_sibling.get('class')):
-            self.div = first_sibling.next_sibling.next_sibling.next_sibling.next_sibling
-        else:
-            self.div = first_sibling.next_sibling.next_sibling
-
-    def get_cursor(self):
-        return self.div
+        return [c for c in next(divs_iter).contents if c != '\n']
 
     def get_mangas(self):
         mangas = []
 
         try:
-            while self.until_next_date_condition():
+            for i in range(1, 9):
+                current_tab = self.soup.find(name="div", id="tab-" + str(i))
+                mangas_list_it = current_tab.children
 
-                chapters_list = self.get_chapters_div_from_manga().contents
-                chapters_list = [c for c in chapters_list if c != "\n"]
+                for _ in mangas_list_it:
+                    try:
+                        manga_title = self.get_manga_title(mangas_list_it)
+                    except StopIteration:
+                        # Happens at the bottom of the page
+                        break
 
-                list_chapter_types = []
-                list_chapter_links = []
-                list_chapter_numbers = []
+                    list_chapter_types = []
+                    list_chapter_links = []
+                    list_chapter_numbers = []
 
-                for chapter in chapters_list:
-                    chapter_contents = chapter.contents
-                    chapter_contents = [c for c in chapter_contents if c != "\n"]
+                    for chapter in self.get_chapters_list(mangas_list_it):
+                        chapter_div = chapter.contents[1]
+                        chapter_text = chapter_div.text
+                        chapter_number = int(search(VF_REGEX, str(chapter_text)).group(1))
+                        chapter_link = chapter_div.get('href')
 
-                    chapter_number = int(search(VF_REGEX, str(chapter_contents[0])).group(1))
+                        if len(chapter.contents) == 4:
+                            chapter_type_str = chapter.contents[3].text.strip()
+                        else:
+                            chapter_type_str = FR_TYPE
 
-                    if len(chapter_contents) == 2:
-                        chapter_type_str = chapter_contents[1].text.strip()
-                    else:
-                        chapter_type_str = FR_TYPE
+                        list_chapter_links.append(os.path.join(JAPSCAN_URL, chapter_link))
+                        list_chapter_types.append(chapter_type_str)
+                        list_chapter_numbers.append(chapter_number)
 
-                    list_chapter_links.append(JAPSCAN_URL + chapter_contents[0].get('href'))
-                    list_chapter_types.append(chapter_type_str)
-                    list_chapter_numbers.append(chapter_number)
+                    manga = dict()
+                    manga['title'] = manga_title
+                    manga['chapters_types'] = list_chapter_types
+                    manga['chapters_links'] = list_chapter_links
+                    manga['chapters_numbers'] = list_chapter_numbers
 
-                manga = dict()
-                manga['title'] = self.get_cursor().text
-                manga['chapters_types'] = list_chapter_types
-                manga['chapters_links'] = list_chapter_links
-                manga['chapters_numbers'] = list_chapter_numbers
-
-                mangas.append(manga)
-
-                self.next_manga_from_manga()
+                    mangas.append(manga)
 
             return mangas
         except Exception as e:
