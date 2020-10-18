@@ -7,6 +7,8 @@ Assassination Classroom
 Astro Boy
 B The Beginning
 Bakemonogatari
+Baki
+Beastars
 Beelzebub
 Bem
 Berserk
@@ -14,6 +16,8 @@ Black Clover
 Black Jack
 Bleach
 Boruto
+Cannon Busters
+Chainsaw man
 Claymore
 Code Geass
 Cowboy Bepop
@@ -25,6 +29,7 @@ Detective Conan
 Devilman Crybaby
 Dice
 Dolly Kill Kill
+Dorehedoro
 Dragon Ball
 Dragon Ball Multiverse
 Dragon Ball Super
@@ -56,9 +61,12 @@ Hunter X Hunter
 Inuyashiki
 I'm The Grim Reaper
 Jojo's Bizarre Adventure
-Jusqu'à Ce Que La Mort Nous Sépare
+Jujutsu Kaisen
+Jusqu'à ce que la mort nous sépare
+Jusqu'à ce que nos os pourrissent
 Karate Shoukoushi Kohinata Minoru
 Ken Le Survivant
+Kengan Ashura
 Kenja no mago
 Kill la Kill
 Kimetsu No Yaiba
@@ -93,6 +101,7 @@ Psycho Pass
 Radiant
 Rebirth
 Reborn
+Rotten
 Saint Seiya
 Samurai Shamploo
 Shaman King
